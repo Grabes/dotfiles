@@ -1,9 +1,17 @@
-[user]
-	name = Paul Miller
-	email = paul@paulmillr.com
+[core]
+        excludesfile = /Users/graber/.gitignore_global
 
-[github]
-  user = paulmillr
+[difftool "sourcetree"]
+        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+        path =
+
+[mergetool "sourcetree"]
+        cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
+
+[user]
+        name = Ehren Graber
+        email = ejgraber@gmail.com
 
 [alias]
   br = branch
@@ -24,28 +32,23 @@
   discard = checkout -- .
   rmtag = "!sh -c 'git tag -d $1; git push origin :refs/tags/$1'"
 
-  changelog = !sh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-changelog.sh"
-  rstatus   = !zsh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-rstatus.sh"
-  release   = !sh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-release.sh"
-  setup     = !zsh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-setup.sh"
-  summary   = !zsh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-summary.sh"
-  delete-branch = !sh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-delete-branch.sh"
+  changelog = !sh "$HOME/Sites/dotfiles/git-extras/git-changelog.sh"
+  rstatus   = !zsh "$HOME/Sites/dotfiles/git-extras/git-rstatus.sh"
+  release   = !sh "$HOME/Sites/dotfiles/git-extras/git-release.sh"
+  setup     = !zsh "$HOME/Sites/dotfiles/git-extras/git-setup.sh"
+  summary   = !zsh "$HOME/Sites/dotfiles/git-extras/git-summary.sh"
+  delete-branch = !sh "$HOME/Sites/dotfiles/git-extras/git-delete-branch.sh"
 
   pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1; } ; f"
 
-  ghfork = !sh "$HOME/Developer/paulmillr/dotfiles/git-extras/git-ghpull.sh"
-  cleanup = !ruby "$HOME/Developer/paulmillr/dotfiles/git-extras/git-cleanup.rb"
+  ghfork = !sh "$HOME//Sites/dotfiles/git-extras/git-ghpull.sh"
+  cleanup = !ruby "$HOME//Sites/dotfiles/git-extras/git-cleanup.rb"
 
 [push]
   default = simple
 
 [color]
   ui = true
-
-[core]
-  editor = subl
-  excludesfile = ~/.gitignore
-  #pager = diff-highlight | less -r
 
 [format]
   pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
@@ -56,25 +59,3 @@
 
 [log]
   abbrevCommit = true
-
-# URL shorthands
-# gh:paulmillr/dotfiles
-[url "git@github.com:"]
-  insteadOf = "gh:"
-  pushInsteadOf = "gh:"
-  pushInsteadOf = "git://github.com/"
-
-# gist:3928760
-[url "git@gist.github.com:"]
-  insteadOf = "gist:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
-
-[mergetool]
-	keepBackup = false
-[init]
-	templatedir = ~/.git_template
-[ghi]
-	token = !security find-internet-password -a paulmillr -s github.com -l 'ghi token' -w
-[pull]
-	rebase = true
