@@ -4,7 +4,7 @@ Colourful & robust OS X configuration files and utilities.
 Installation is done with simple command set (see “building system from scratch” for setup of new system):
 
 ```
-curl --silent https://raw.githubusercontent.com/paulmillr/dotfiles/master/install.sh | sh
+curl --silent https://raw.githubusercontent.com/ehrengraber/dotfiles/master/install.sh | sh
 ```
 
 ## Additional steps
@@ -13,7 +13,7 @@ curl --silent https://raw.githubusercontent.com/paulmillr/dotfiles/master/instal
 2. Change default shell to ZSH: `chsh -s /bin/zsh`.
 3. Install XCode.
 4. Install [Hermit](https://pcaro.es/p/hermit/#downloads) font.
-5. Change Terminal.app theme to `terminal/paulmillr.terminal` (Settings -> Profiles -> Press gear -> Import).
+5. Change Terminal.app theme to `terminal/ehrengraber.terminal` (Settings -> Profiles -> Press gear -> Import).
 
 ## Features
 
@@ -67,4 +67,4 @@ Shell (zsh):
 
 ## License
 
-[MIT](https://github.com/paulmillr/mit) (c) 2016 Paul Miller (http://paulmillr.com)
+[MIT](https://github.com/ehrengraber/mit) (c) 2016 Paul Miller (http://ehrengraber.com)
