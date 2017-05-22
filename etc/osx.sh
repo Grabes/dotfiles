@@ -71,6 +71,9 @@ sudo pmset -a sms 0
 # Finder
 # ======
 
+# Finder: show hidden files by default
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
@@ -158,24 +161,6 @@ sudo mdutil -E / > /dev/null
 # sleep 1 # Wait a bit to make sure the theme is loaded
 # defaults write com.apple.terminal 'Default Window Settings' -string 'paulmillr'
 # defaults write com.apple.terminal 'Startup Window Settings' -string 'paulmillr'
-
-# Transmission
-# ============
-
-# Use `~/Documents/Torrents` to store incomplete downloads
-defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
-defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Documents/Torrents"
-
-# Don’t prompt for confirmation before downloading
-defaults write org.m0k.transmission DownloadAsk -bool false
-
-# Trash original torrent files
-defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
-
-# Hide the donate message
-defaults write org.m0k.transmission WarningDonate -bool false
-# Hide the legal disclaimer
-defaults write org.m0k.transmission WarningLegal -bool false
 
 # Memory management
 # =================

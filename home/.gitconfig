@@ -41,8 +41,8 @@
 
   pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1; } ; f"
 
-  ghfork = !sh "$HOME//Sites/dotfiles/git-extras/git-ghpull.sh"
-  cleanup = !ruby "$HOME//Sites/dotfiles/git-extras/git-cleanup.rb"
+  ghfork = !sh "$HOME/Sites/dotfiles/git-extras/git-ghpull.sh"
+  cleanup = !ruby "$HOME/Sites/dotfiles/git-extras/git-cleanup.rb"
 
 [push]
   default = simple
