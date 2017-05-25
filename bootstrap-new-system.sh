@@ -2,7 +2,7 @@
 
 # A simple script for setting up OSX dev environment.
 
-dev="$HOME/Developer"
+dev="$HOME/Code"
 pushd .
 mkdir -p $dev
 cd $dev

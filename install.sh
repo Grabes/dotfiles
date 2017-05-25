@@ -1,6 +1,6 @@
 echo 'You might need to change your default shell to zsh: `chsh -s /bin/zsh` (or `sudo vim /etc/passwd`)'
 
-dir="$HOME/Developer/ehrengraber"
+dir="$HOME/Code/Tools"
 mkdir -p $dir
 cd $dir
 git clone --recursive git://github.com/grabes/dotfiles.git
