@@ -17,8 +17,8 @@ fpath=("$curr/terminal" $fpath)
 autoload -Uz promptinit && promptinit
 prompt 'paulmillr'
 
-bindkey '\e\e^[^[[C' forward-word
-bindkey '\e\e^[^[[D' backward-word
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word
 
 # ==================================================================
 # = Aliases =
