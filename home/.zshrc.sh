@@ -17,9 +17,6 @@ fpath=("$curr/terminal" $fpath)
 autoload -Uz promptinit && promptinit
 prompt 'paulmillr'
 
-bindkey '\e\e[C' forward-word
-bindkey '\e\e[D' backward-word
-
 # ==================================================================
 # = Aliases =
 # ==================================================================
@@ -67,6 +64,32 @@ else
   # Process grep should output full paths to binaries.
   alias pgrep='pgrep -fl'
 fi
+
+# Aliases for docker
+alias c='docker-compose'
+alias cb='docker-compose build'
+alias cup='docker-compose up'
+alias cud='docker-compose up -d'
+alias cr='docker-compose run --service-ports --rm'
+alias crl='docker-compose run --service-ports --rm local'
+alias crd='docker-compose run --service-ports --rm develop'
+alias crt='docker-compose run --rm test'
+alias crp='docker-compose run --rm provision'
+alias crci='docker-compose run --rm ci'
+alias crwt='docker-compose run --rm watchtest'
+alias cps='docker-compose ps'
+alias clogs='docker-compose logs'
+
+crm(){
+	docker-compose stop $1
+	docker-compose rm --force $1
+}
+
+# Aliases for Laravel
+alias test='clear && vendor/bin/phpunit'
+alias art='php artisan'
+alias artisan = 'php artisan'
+alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
 
 # Git short-cuts.
 alias g='git'
