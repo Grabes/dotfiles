@@ -91,6 +91,14 @@ alias art='php artisan'
 alias artisan = 'php artisan'
 alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
 
+# Aliases for docker compose
+alias dc-up="docker-compose up -d"
+alias dc-down="docker-compose down"
+
+#one-off containers
+function dc-art() { docker exec -it phpfpm bash && cd /var/www/html/laravel/ && php artisan $@; }
+wrap_args() { echo "before $@ after"; }
+
 # Git short-cuts.
 alias g='git'
 alias ga='git add'
