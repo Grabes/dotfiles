@@ -91,7 +91,7 @@ crm(){
 # Aliases for Laravel
 alias test='clear && vendor/bin/phpunit'
 alias art='php artisan'
-alias artisan = 'php artisan'
+alias artisan='php artisan'
 alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
 
 # Aliases for docker compose
