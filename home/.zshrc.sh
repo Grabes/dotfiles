@@ -68,7 +68,6 @@ else
   alias pgrep='pgrep -fl'
 fi
 
-
 # Aliases for docker
 alias c='docker-compose'
 alias cb='docker-compose build'
@@ -92,7 +91,7 @@ crm(){
 # Aliases for Laravel
 alias test='clear && vendor/bin/phpunit'
 alias art='php artisan'
-alias artisan='php artisan'
+alias artisan = 'php artisan'
 alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
 
 # Aliases for docker compose
@@ -104,6 +103,8 @@ function dc-art() { docker exec -it phpfpm bash -c "cd /var/www/html/laravel/ &&
 
 #one-off containers
 function dc-test() { docker exec -ti phpfpm bash -c "cd /var/www/html/laravel && phpunit $@" }
+
+wrap_args() { echo "before $@ after"; }
 
 # Git short-cuts.
 alias g='git'
