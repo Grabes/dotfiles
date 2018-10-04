@@ -89,7 +89,7 @@ crm(){
 }
 
 # Aliases for Laravel
-alias test='clear && vendor/bin/phpunit'
+# alias test='clear && vendor/bin/phpunit'
 alias art='php artisan'
 alias artisan='php artisan'
 alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
@@ -447,3 +447,4 @@ function preview() {
   open $1 -a 'Preview'
 }
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
