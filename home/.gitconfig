@@ -42,6 +42,7 @@
 
   ghfork = !sh "$HOME/Sites/dotfiles/git-extras/git-ghpull.sh"
   cleanup = !ruby "$HOME/Sites/dotfiles/git-extras/git-cleanup.rb"
+	fix = !git diff --name-only --relative -z --diff-filter=U | xargs -0 ${EDITOR}
 
 [push]
   default = simple
@@ -63,3 +64,9 @@
 [credential]
 	helper = !aws codecommit credential-helper $@
 	UseHttpPath = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
