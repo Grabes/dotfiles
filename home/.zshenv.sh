@@ -10,8 +10,8 @@ fi
 
 # Editors.
 # --------
-export EDITOR='/usr/local/bin/subl'
-export VISUAL='/usr/local/bin/subl'
+export EDITOR='code'
+export VISUAL='code'
 export PAGER='less'
 
 # Language.

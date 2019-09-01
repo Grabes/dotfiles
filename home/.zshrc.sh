@@ -17,8 +17,8 @@ fpath=("$curr/terminal" $fpath)
 autoload -Uz promptinit && promptinit
 prompt 'paulmillr'
 
-bindkey '\e\e[C' forward-word
-bindkey '\e\e[D' backward-word
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
 
 # ==================================================================
 # = Aliases =
@@ -67,6 +67,44 @@ else
   # Process grep should output full paths to binaries.
   alias pgrep='pgrep -fl'
 fi
+
+# Aliases for docker
+alias c='docker-compose'
+alias cb='docker-compose build'
+alias cup='docker-compose up'
+alias cud='docker-compose up -d'
+alias cr='docker-compose run --service-ports --rm'
+alias crl='docker-compose run --service-ports --rm local'
+alias crd='docker-compose run --service-ports --rm develop'
+alias crt='docker-compose run --rm test'
+alias crp='docker-compose run --rm provision'
+alias crci='docker-compose run --rm ci'
+alias crwt='docker-compose run --rm watchtest'
+alias cps='docker-compose ps'
+alias clogs='docker-compose logs'
+
+crm(){
+	docker-compose stop $1
+	docker-compose rm --force $1
+}
+
+# Aliases for Laravel
+# alias test='clear && vendor/bin/phpunit'
+alias art='php artisan'
+alias artisan='php artisan'
+alias db-reset='php artisan migrate:reset && php artisan migrate --seed'
+
+# Aliases for docker compose
+alias dc-up="docker-compose up -d"
+alias dc-down="docker-compose down"
+
+#one-off containers
+function dc-art() { docker exec -it phpfpm bash -c "cd /var/www/html/laravel/ && php artisan $@" }
+
+#one-off containers
+function dc-test() { docker exec -ti phpfpm bash -c "cd /var/www/html/laravel && phpunit $@" }
+
+wrap_args() { echo "before $@ after"; }
 
 # Git short-cuts.
 alias g='git'

@@ -166,3 +166,4 @@ alias stop-pg='pg_ctl stop -m fast'
 alias show-pg-status='pg_ctl status'
 alias restart-pg='pg_ctl reload'
 
+export PATH="$PATH:$HOME/.composer/vendor/bin"
