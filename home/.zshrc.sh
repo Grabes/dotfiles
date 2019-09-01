@@ -120,17 +120,12 @@ function commits() {
   git log $1 --oneline --reverse | cut -d' ' -f 1 | tr '\n' ' '
 }
 
-# own git workflow in hy origin with Tower
-
+alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias wip="git add . && git commit -m 'wip'"
 
 # Dev short-cuts.
 
-# Brunch.
-alias bb='brunch build'
-alias bbp='brunch build --production'
-alias bw='brunch w'
-alias bws='brunch w --server'
-
+# javascript
 alias nr='npm run'
 
 # Package managers.
@@ -180,6 +175,32 @@ fi
 # Lists the ten most used commands.
 alias history-stat="history 0 | awk '{print \$2}' | sort | uniq -c | sort -n -r | head"
 
+# PHP
+alias punitf="php vendor/bin/phpunit --filter"
+alias punit="php vendor/bin/phpunit"
+alias art="php artisan"
+alias tinker="php artisan tinker"
+
+# terminal
+alias copyssh="pbcopy < $HOME/.ssh/id_rsa.pub"
+alias reloadcli="source $HOME/.zshrc"
+alias dotfiles="code $HOME/Developer/ehrengraber/dotfiles"
+
+# copy the working directory path
+alias cpwd='pwd|tr -d "\n"|pbcopy'
+
+# Get your current public IP
+alias ip="curl icanhazip.com"
+
+# DNS (with update thanks to @blanco)
+alias flushdns="sudo killall -HUP mDNSResponder"
+
+## change directory ##
+alias cd..='cd ..' ## a quick way to get out of current directory ##
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
 # ==================================================================
 # = Functions =
 # ==================================================================
@@ -211,24 +232,6 @@ function get-pass() {
   keychain="$HOME/Library/Keychains/login.keychain"
   security -q find-generic-password -g -l $@ $keychain 2>&1 |\
     awk -F\" '/password:/ {print $2}';
-}
-
-# Opens file in EDITOR.
-function edit() {
-  local dir=$1
-  [[ -z "$dir" ]] && dir='.'
-  $EDITOR $dir
-}
-alias e=edit
-
-# Execute commands for each file in current directory.
-function each() {
-  for dir in *; do
-    # echo "${dir}:"
-    cd $dir
-    $@
-    cd ..
-  done
 }
 
 # Find files and exec commands at them.
@@ -402,9 +405,66 @@ function retry() {
   retry $@
 }
 
+function ssl-check() {
+    f=~/.localhost_ssl;
+    ssl_crt=$f/server.crt
+    ssl_key=$f/server.key
+    b=$(tput bold)
+    c=$(tput sgr0)
+    
+    local_ip=$(ipconfig getifaddr $(route get default | grep interface | awk '{print $2}'))
+    # local_ip=999.999.999 # (uncomment for testing)
+    
+    domains=(
+        "localhost"
+        "$local_ip"
+    )
+    
+    if [[ ! -f $ssl_crt ]]; then
+        echo -e "\n🛑  ${b}Couldn't find a Slate SSL certificate:${c}"
+        make_key=true
+    elif [[ ! $(openssl x509 -noout -text -in $ssl_crt | grep $local_ip) ]]; then
+        echo -e "\n🛑  ${b}Your IP Address has changed:${c}"
+        make_key=true
+    else
+        echo -e "\n✅  ${b}Your IP address is still the same.${c}"
+    fi
+    
+    if [[ $make_key == true ]]; then
+        echo -e "Generating a new Slate SSL certificate...\n"
+        count=$(( ${#domains[@]} - 1))
+        mkcert ${domains[@]}
+    
+        # Create Slate's default certificate directory, if it doesn't exist
+        test ! -d $f && mkdir $f
+    
+        # It appears mkcert bases its filenames off the number of domains passed after the first one.
+        # This script predicts that filename, so it can copy it to Slate's default location.
+        if [[ $count = 0 ]]; then
+            mv ./localhost.pem $ssl_crt
+            mv ./localhost-key.pem $ssl_key
+        else
+            mv ./localhost+$count.pem $ssl_crt
+            mv ./localhost+$count-key.pem $ssl_key
+        fi
+    fi
+}
+
+
 # Open curr dir in preview.app.
 function preview() {
   local item=$1
   [[ -z "$item" ]] && item='.'
   open $1 -a 'Preview'
 }
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+# Shopify CLI
+[ -f "/Users/ehrengraber/.shopify-app-cli/shopify.sh" ] && source "/Users/ehrengraber/.shopify-app-cli/shopify.sh"
+
+# add mysql to path
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
